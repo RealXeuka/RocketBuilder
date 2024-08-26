@@ -57,23 +57,21 @@ set "venv_name=.venv_!selected_version!"
 
 title RocketClient
 cls
-echo https://t.me/RocketClient
+echo https://t.me/RocketClient (1/2)
 "!selected_python_path!" -m venv "!venv_name!"
 
 title RocketClient
 cls
-echo https://t.me/RocketClient
+echo https://t.me/RocketClient (2/2)
 "!venv_name!\Scripts\pip" install -r requirements.txt
-
-title RocketClient
-cls
-echo https://t.me/RocketClient
-"!venv_name!\Scripts\python" tools\update.py
 
 if %errorlevel% equ 0 (
 	cls
 	title RocketClient
 	echo https://t.me/RocketClient
+	echo.
+	echo Builder has been Started!
+	echo.
 	"!venv_name!\Scripts\python" builder.py
 ) else if %errorlevel% equ 1 (
 	title RocketClient
