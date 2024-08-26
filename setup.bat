@@ -4,8 +4,6 @@ title Checking Python Versions
 setlocal enabledelayedexpansion
 set "python_versions="
 
-:: Check if the batch file has administrator rights
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
 :: If the above command fails (meaning the batch file is not running as administrator),
 :: restart the batch file, this time with administrator privileges
